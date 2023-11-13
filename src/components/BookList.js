@@ -1,77 +1,70 @@
-// src/components/BookList.js
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import BookDetails from './BookDetails';
-import BookReviews from './BookReviews';
 
 const BookList = () => {
   const [books, setBooks] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedBook, setSelectedBook] = useState(null);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          'https://openlibrary.org/subjects/family-friendly.json'
-        );
-        // Assuming the API response includes a rating property
-        // Modify accordingly based on the actual API response
-        const booksWithRating = response.data.works.map((book) => ({
-          ...book,
-          rating: Math.random() * 5, // Example rating (replace with actual rating if available)
-        }));
-        setBooks(booksWithRating);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        `https://openlibrary.org/search.json?q=${searchTerm}`
+      );
+      setBooks(response.data.docs);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
-    setSelectedBook(null); // Clear selected book when a new search term is entered
   };
 
-  const isFamilyFriendly = (book) => {
-    // Add your family-friendly criteria here
-    // For simplicity, this example assumes all books are family-friendly.
-    return true;
+  const handleSearchButtonClick = () => {
+    fetchData();
   };
 
-  const filteredBooks = books
-    .filter((book) => isFamilyFriendly(book))
-    .filter((book) =>
-      book.title.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-
-  const handleBookClick = (book) => {
+  const handleViewDetails = (book) => {
     setSelectedBook(book);
+  };
+
+  const handleCloseDetails = () => {
+    setSelectedBook(null);
   };
 
   return (
     <div>
-      <h2>Family-Friendly Books</h2>
+      <h2>Search Books</h2>
       <input
         type="text"
-        placeholder="Search by title"
+        id="searchInput"
+        placeholder="Enter your search query"
         value={searchTerm}
         onChange={handleSearch}
       />
+      <button onClick={handleSearchButtonClick}>Search</button>
       <ul>
-        {filteredBooks.map((book) => (
-          <li key={book.key} onClick={() => handleBookClick(book)}>
-            {book.title}
+        {books.map((book) => (
+          <li key={book.key}>
+            <h3>{book.title}</h3>
+            {book.cover_i && (
+              <img
+                src={`http://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`}
+                alt={`Cover for ${book.title}`}
+              />
+            )}
+            <button onClick={() => handleViewDetails(book)}>
+              View Details
+            </button>
           </li>
         ))}
       </ul>
       {selectedBook && (
         <div>
           <BookDetails book={selectedBook} />
-          {/* Add book reviews component here */}
-          {/* <BookReviews reviews={selectedBook.reviews} /> */}
+          <button onClick={handleCloseDetails}>Close Details</button>
         </div>
       )}
     </div>
