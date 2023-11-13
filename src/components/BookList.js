@@ -40,7 +40,7 @@ const BookList = () => {
       <input
         type="text"
         id="searchInput"
-        placeholder="Enter your search query"
+        placeholder="Search by title..."
         value={searchTerm}
         onChange={handleSearch}
       />
