@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/yellowbookbag/static/css/main.5ecd60fb.chunk.css",
-    "main.js": "/yellowbookbag/static/js/main.4fad9d22.chunk.js",
-    "main.js.map": "/yellowbookbag/static/js/main.4fad9d22.chunk.js.map",
+    "main.js": "/yellowbookbag/static/js/main.0190c50e.chunk.js",
+    "main.js.map": "/yellowbookbag/static/js/main.0190c50e.chunk.js.map",
     "runtime~main.js": "/yellowbookbag/static/js/runtime~main.2bbb323d.js",
     "runtime~main.js.map": "/yellowbookbag/static/js/runtime~main.2bbb323d.js.map",
-    "static/js/2.8a6596eb.chunk.js": "/yellowbookbag/static/js/2.8a6596eb.chunk.js",
-    "static/js/2.8a6596eb.chunk.js.map": "/yellowbookbag/static/js/2.8a6596eb.chunk.js.map",
+    "static/js/2.43059f4f.chunk.js": "/yellowbookbag/static/js/2.43059f4f.chunk.js",
+    "static/js/2.43059f4f.chunk.js.map": "/yellowbookbag/static/js/2.43059f4f.chunk.js.map",
     "static/js/3.fc5cbf83.chunk.js": "/yellowbookbag/static/js/3.fc5cbf83.chunk.js",
     "static/js/3.fc5cbf83.chunk.js.map": "/yellowbookbag/static/js/3.fc5cbf83.chunk.js.map",
     "index.html": "/yellowbookbag/index.html",
-    "precache-manifest.1dc585d449026e3e51df85fc38275071.js": "/yellowbookbag/precache-manifest.1dc585d449026e3e51df85fc38275071.js",
+    "precache-manifest.5081e7af9b0a3b21f5d4dbf73d4a4026.js": "/yellowbookbag/precache-manifest.5081e7af9b0a3b21f5d4dbf73d4a4026.js",
     "service-worker.js": "/yellowbookbag/service-worker.js",
     "static/css/main.5ecd60fb.chunk.css.map": "/yellowbookbag/static/css/main.5ecd60fb.chunk.css.map"
   }
