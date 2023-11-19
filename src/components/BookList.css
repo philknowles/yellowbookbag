@@ -21,6 +21,10 @@
   width: 100%; /* Ensure details take up the full width */
 }
 
+.book-details-transition {
+  transition: ease-in-out;
+}
+
 .book-details img {
   margin-right: 10px;
   /* Adjust as needed to create space between the image and details */
@@ -30,7 +34,24 @@
   margin-top: 10px;
 }
 
+/* Add this CSS in your stylesheet or inline style */
+.book-details-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
+.book-publication {
+  flex: 1;
+  margin-right: 10px; /* Adjust as needed for spacing */
+  border:1px solid rgb(112, 112, 112);
+  text-align:center;
+}
+
+.book-publication span {
+  font-size:13px;
+  color:#333;
+}
 /* Additional styles for better readability */
 ul {
   list-style: none;

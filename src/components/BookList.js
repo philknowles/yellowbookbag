@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import BookDetails from './BookDetails';
-import Modal from './Modal';
 import Navbar from './Navbar';
 import './Modal.css';
 import './BookList.css'; // Import the new CSS file
@@ -15,25 +14,34 @@ const BookList = () => {
   const [itemsPerPage] = useState(10);
   const [hasSearched, setHasSearched] = useState(false);
 
-  const fetchData = async () => {
-    try {
-      const response = await axios.get(
-        `https://openlibrary.org/search.json?q=${searchTerm}`
-      );
-      setBooks(response.data.docs);
-      setCurrentPage(1);
-      setSelectedBook(null);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
+  // const fetchData = async () => {
+  //   try {
+  //     const response = await axios.get(
+  //       `https://openlibrary.org/search.json?q=${searchTerm}`
+  //     );
+  //     setBooks(response.data.docs);
+  //     setCurrentPage(1);
+  //     setSelectedBook(null);
+  //   } catch (error) {
+  //     console.error('Error fetching data:', error);
+  //   }
+  // };
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
 
   const handleSearchSubmit = () => {
-    fetchData();
+    const query = `https://openlibrary.org/search.json?q=${searchTerm}&limit=${itemsPerPage}&page=${currentPage}`;
+
+    // Fetch the data from the API
+    fetch(query)
+      .then((response) => response.json())
+      .then((data) => {
+        setBooks(data.docs);
+        setHasSearched(true);
+      })
+      .catch((error) => console.error('Error fetching data:', error));
   };
 
   const handleViewDetails = (book) => {
@@ -78,7 +86,7 @@ const BookList = () => {
                 <div className="book-details">
                   {book.cover_i ? (
                     <img
-                      src={`http://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`}
+                      src={`https://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg`}
                       alt={`Cover for ${book.title}`}
                     />
                   ) : (
@@ -87,13 +95,15 @@ const BookList = () => {
                       alt="No Cover"
                     />
                   )}
-                  <div class="book-text">
+                  <div className="book-text">
                     <button onClick={() => toggleDetails(book)}>
                       {selectedBook === book ? 'Hide Details' : 'View Details'}
                     </button>
-                    {selectedBook === book && <BookDetails book={book} />}
-                    {/* Conditionally render the details based on the button click */}
+                    <div>
+                      {selectedBook === book && <BookDetails book={book} />}
+                    </div>
                   </div>
+                  {/* Conditionally render the details based on the button click */}
                 </div>
               </div>
             </li>
