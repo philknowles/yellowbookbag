@@ -2,25 +2,34 @@
 .book-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin-bottom: 20px; /* Adjust as needed */
+  align-items: flex-start;
+  margin-bottom: 20px;
+  padding:0 15px;
 }
 
 .book-info {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin-bottom: 10px; /* Adjust as needed */
+  align-items: flex-start;
+  margin-bottom: 10px;
 }
 
 .book-details {
-  flex-grow: 1;
-  margin-top: 20px; /* Adjust as needed */
+  display: flex;
+  justify-content: space-between; /* Adjust as needed */
+  align-items: flex-start;
+  width: 100%; /* Ensure details take up the full width */
+}
+
+.book-details img {
+  margin-right: 10px;
+  /* Adjust as needed to create space between the image and details */
 }
 
 .book-details button {
-  margin-top: 10px; /* Adjust as needed */
+  margin-top: 10px;
 }
+
 
 /* Additional styles for better readability */
 ul {

@@ -12,7 +12,7 @@ const BookList = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedBook, setSelectedBook] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(5);
+  const [itemsPerPage] = useState(10);
   const [hasSearched, setHasSearched] = useState(false);
 
   const fetchData = async () => {
@@ -23,7 +23,6 @@ const BookList = () => {
       setBooks(response.data.docs);
       setCurrentPage(1);
       setSelectedBook(null);
-      setHasSearched(true);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -43,6 +42,10 @@ const BookList = () => {
 
   const handleCloseDetails = () => {
     setSelectedBook(null);
+  };
+
+  const toggleDetails = (book) => {
+    setSelectedBook(selectedBook === book ? null : book);
   };
 
   const indexOfLastBook = currentPage * itemsPerPage;
@@ -84,10 +87,13 @@ const BookList = () => {
                       alt="No Cover"
                     />
                   )}
-                  <BookDetails book={book} />
-                  <button onClick={() => handleViewDetails(book)}>
-                    View Details
-                  </button>
+                  <div class="book-text">
+                    <button onClick={() => toggleDetails(book)}>
+                      {selectedBook === book ? 'Hide Details' : 'View Details'}
+                    </button>
+                    {selectedBook === book && <BookDetails book={book} />}
+                    {/* Conditionally render the details based on the button click */}
+                  </div>
                 </div>
               </div>
             </li>
