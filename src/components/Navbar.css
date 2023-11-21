@@ -32,3 +32,24 @@
   cursor: pointer;
   font-size:20px;
 }
+
+/* Navbar.css */
+.navbar-list {
+  list-style: none;
+  padding: 0;
+  display: flex; /* Use flexbox for horizontal alignment */
+}
+
+.navbar-list li {
+  margin-right: 20px; /* Add margin between list items for spacing */
+}
+
+.navbar-list li:last-child {
+  margin-right: 20px; /* Remove margin for the last list item */
+}
+
+.navbar-list a {
+  text-decoration: none;
+  color: black;
+  /* Add additional styling as needed */
+}

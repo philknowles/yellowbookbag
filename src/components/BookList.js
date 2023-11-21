@@ -1,5 +1,6 @@
 // BookList.js
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import BookDetails from './BookDetails';
 import Navbar from './Navbar';
@@ -13,19 +14,6 @@ const BookList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);
   const [hasSearched, setHasSearched] = useState(false);
-
-  // const fetchData = async () => {
-  //   try {
-  //     const response = await axios.get(
-  //       `https://openlibrary.org/search.json?q=${searchTerm}`
-  //     );
-  //     setBooks(response.data.docs);
-  //     setCurrentPage(1);
-  //     setSelectedBook(null);
-  //   } catch (error) {
-  //     console.error('Error fetching data:', error);
-  //   }
-  // };
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
