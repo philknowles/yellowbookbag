@@ -7,8 +7,9 @@ const BookDetails = ({ book, isVisible }) => {
 
   return (
     <div className="book-details-transition">
-      <h3>{book.title}</h3>
-      by {book.author_name ? book.author_name.join(', ') : 'N/A'}
+      {/* <h3>{book.title}</h3>
+      by {book.author_name ? book.author_name.join(', ') : 'N/A'} */}
+      <p>{book.first_sentence || 'N/A'}</p>
       <div className="book-details-row">
         <div className="book-publication">
           <p><span>Publication Date:</span><br /> {publish_date ? publish_date[0] || 'N/A' : 'N/A'}</p>
@@ -20,12 +21,19 @@ const BookDetails = ({ book, isVisible }) => {
           <p><span>Language:</span><br /> {language && language[0] == 'eng' ? 'English' : 'N/A'}</p>
         </div>
       </div>
-      <p>ISBN: {book.isbn ? book.isbn[0] : 'N/A'}</p>
-      <p>Edition: {book.edition_key ? book.edition_key[0] : 'N/A'}</p>
-      <p>Number of Pages: {book.number_of_pages + ', ' || 'N/A'}</p>
-      <p>Genres: {book.subject ? book.subject.join(', ') : 'N/A'}</p>
-      <p>Tags: {book.subject ? book.subject.join(', ') : 'N/A'}</p>
-      <p>Description: {book.description || 'N/A'}</p>
+      <div className="book-details-row">
+        <div className="book-publication">
+          <p><span>ISBN:</span><br /> {book.isbn ? book.isbn[0] : 'N/A'}</p>
+        </div>
+        <div className="book-publication">
+          <p><span>Edition:</span><br /> {book.edition_key ? book.edition_key[0] : 'N/A'}</p>
+        </div>
+        <div className="book-publication">
+          <p><span>Number of Pages:</span><br /> {book.number_of_pages_median + ' ' || 'N/A'}</p>
+        </div>
+      </div>
+      <p>Genres: <small>{book.subject ? book.subject.join(', ') : 'N/A'}</small></p>
+      <p>Tags: <small>{book.subject ? book.subject.join(', ') : 'N/A'}</small></p>
       {book.rating && (
         <div>
           <p>Rating: {book.rating.toFixed(1)}</p>

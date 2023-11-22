@@ -19,14 +19,23 @@ const BookList = () => {
   const [hasSearched, setHasSearched] = useState(false);
 
   useEffect(() => {
-    // Fetch 10 books for the carousel on initial load
-    const carouselQuery = `https://openlibrary.org/search.json?limit=10`;
-    fetch(carouselQuery)
+    // Fetch data from the Open Library API for popular books (no specific genre) with cover images
+    fetch('https://openlibrary.org/subjects/popular.json?limit=10')
       .then((response) => response.json())
-      .then((data) => setBooks(data.docs))
-      .catch((error) => console.error('Error fetching carousel data:', error));
+      .then((data) => {
+        // Extract relevant information from the API response
+        const booksWithCovers = data.works
+          .filter((work) => work.cover_edition_key) // Filter out works without cover images
+          .map((work) => ({
+            key: work.cover_edition_key,
+            title: work.title,
+            cover_i: null, // You can set this to null or fetch cover_i using another API endpoint
+          }));
+        setBooks(booksWithCovers);
+      })
+      .catch((error) => console.error('Error fetching data:', error));
   }, []);
-
+  
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
@@ -65,13 +74,13 @@ const BookList = () => {
     setSelectedBook(null);
   };
 
-  const noCoverImageUrl = 'https://via.placeholder.com/150x200.png'; // Replace with your actual "no cover" image URL
+  const noCoverImageUrl = 'https://via.placeholder.com/200x300.png'; // Replace with your actual "no cover" image URL
 
   const sliderSettings = {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: 5,
     slidesToScroll: 1,
   };
 
@@ -83,33 +92,42 @@ const BookList = () => {
         onSearchChange={handleSearchChange}
         onSearchSubmit={handleSearchSubmit}
       />
-      {hasSearched && books.length === 0 && (
-        <p>No books found. Please try a different search term.</p>
-      )}
-      {books.length > 0 && (
+      {!hasSearched && (
         <>
-          <h2>Featured Books</h2>
+          <div className="carousel-container">
+            <h2>Featured Books</h2>
             <Slider {...sliderSettings}>
               {books.map((book) => (
                 <div key={book.key} className="carousel-item">
                   <img
-                    src={`https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`}
+                    src={`https://covers.openlibrary.org/b/olid/${book.key}-M.jpg`}
                     alt={`Cover for ${book.title}`}
+                    className="cover-image"
                   />
                   <p>{book.title}</p>
                 </div>
               ))}
             </Slider>
+          </div>
+        </>
+      )}
+      {hasSearched && books.length === 0 && (
+        <p>No books found. Please try a different search term.</p>
+      )}
+      {hasSearched && books.length > 0 && (
+        <div className="carousel-container">
             <ul>
               {currentBooks.map((book) => (
                 <li key={book.key} className="book-container">
+                    <p><b>{book.title}</b><br />
+                    <small>by {book.author_name ? book.author_name.join(', ') : 'Unknown'} | Star Reviews: {book.ratings_average ? Math.round(book.ratings_average * 100) / 100 : 'N/A'} | Edition count: {book.edition_count}</small></p>
                   <div className="book-info">
-                    <h3>{book.title}</h3>
                     <div className="book-details">
                       {book.cover_i ? (
                         <img
-                          src={`https://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg`}
+                          src={`https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`}
                           alt={`Cover for ${book.title}`}
+                          className="cover-image"
                         />
                       ) : (
                         <img
@@ -131,7 +149,7 @@ const BookList = () => {
                 </li>
               ))}
             </ul>
-        </>
+            </div>
       )}
       {books.length > itemsPerPage && (
         <nav>

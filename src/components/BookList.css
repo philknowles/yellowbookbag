@@ -43,6 +43,7 @@
 
 .book-publication {
   flex: 1;
+  margin-top:10px;
   margin-right: 10px; /* Adjust as needed for spacing */
   border:1px solid rgb(112, 112, 112);
   text-align:center;
@@ -82,4 +83,20 @@ ul {
 .active a {
   background-color: #333;
   color: white;
+}
+
+/* Carousel for featured Books */
+.carousel-container {
+  margin-left: 20px;  /* Adjust the left margin as needed */
+  margin-right: 20px; /* Adjust the right margin as needed */
+}
+
+.cover-image {
+  width: 200px; /* Adjust the width as needed */
+  height: 300px; /* Adjust the height as needed */
+  object-fit: cover; /* Maintain aspect ratio while covering the entire space */
+}
+
+.carousel-item {
+  /* Add any additional styling for your carousel items */
 }
