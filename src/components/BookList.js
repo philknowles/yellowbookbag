@@ -1,5 +1,8 @@
 // BookList.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import BookDetails from './BookDetails';
@@ -14,6 +17,15 @@ const BookList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);
   const [hasSearched, setHasSearched] = useState(false);
+
+  useEffect(() => {
+    // Fetch 10 books for the carousel on initial load
+    const carouselQuery = `https://openlibrary.org/search.json?limit=10`;
+    fetch(carouselQuery)
+      .then((response) => response.json())
+      .then((data) => setBooks(data.docs))
+      .catch((error) => console.error('Error fetching carousel data:', error));
+  }, []);
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -55,6 +67,15 @@ const BookList = () => {
 
   const noCoverImageUrl = 'https://via.placeholder.com/150x200.png'; // Replace with your actual "no cover" image URL
 
+  const sliderSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+  };
+
+
   return (
     <div>
       <Navbar
@@ -66,37 +87,51 @@ const BookList = () => {
         <p>No books found. Please try a different search term.</p>
       )}
       {books.length > 0 && (
-        <ul>
-          {currentBooks.map((book) => (
-            <li key={book.key} className="book-container">
-              <div className="book-info">
-                <h3>{book.title}</h3>
-                <div className="book-details">
-                  {book.cover_i ? (
-                    <img
-                      src={`https://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg`}
-                      alt={`Cover for ${book.title}`}
-                    />
-                  ) : (
-                    <img
-                      src={noCoverImageUrl}
-                      alt="No Cover"
-                    />
-                  )}
-                  <div className="book-text">
-                    <button onClick={() => toggleDetails(book)}>
-                      {selectedBook === book ? 'Hide Details' : 'View Details'}
-                    </button>
-                    <div>
-                      {selectedBook === book && <BookDetails book={book} />}
+        <>
+          <h2>Featured Books</h2>
+            <Slider {...sliderSettings}>
+              {books.map((book) => (
+                <div key={book.key} className="carousel-item">
+                  <img
+                    src={`https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`}
+                    alt={`Cover for ${book.title}`}
+                  />
+                  <p>{book.title}</p>
+                </div>
+              ))}
+            </Slider>
+            <ul>
+              {currentBooks.map((book) => (
+                <li key={book.key} className="book-container">
+                  <div className="book-info">
+                    <h3>{book.title}</h3>
+                    <div className="book-details">
+                      {book.cover_i ? (
+                        <img
+                          src={`https://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg`}
+                          alt={`Cover for ${book.title}`}
+                        />
+                      ) : (
+                        <img
+                          src={noCoverImageUrl}
+                          alt="No Cover"
+                        />
+                      )}
+                      <div className="book-text">
+                        <button onClick={() => toggleDetails(book)}>
+                          {selectedBook === book ? 'Hide Details' : 'View Details'}
+                        </button>
+                        <div>
+                          {selectedBook === book && <BookDetails book={book} />}
+                        </div>
+                      </div>
+                      {/* Conditionally render the details based on the button click */}
                     </div>
                   </div>
-                  {/* Conditionally render the details based on the button click */}
-                </div>
-              </div>
-            </li>
-          ))}
-        </ul>
+                </li>
+              ))}
+            </ul>
+        </>
       )}
       {books.length > itemsPerPage && (
         <nav>
