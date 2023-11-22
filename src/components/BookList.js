@@ -32,7 +32,7 @@ const BookList = () => {
   };
 
   const handleSearchSubmit = () => {
-    const query = `https://openlibrary.org/search.json?q=${searchTerm}&limit=${itemsPerPage}&page=${currentPage}`;
+    const query = `https://openlibrary.org/search.json?q=${searchTerm}`;
 
     // Fetch the data from the API
     fetch(query)
