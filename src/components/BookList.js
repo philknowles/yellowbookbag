@@ -1,32 +1,56 @@
-import React, { useState } from 'react';
+// BookList.js
+import React, { useState, useEffect } from 'react';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import BookDetails from './BookDetails';
+import Navbar from './Navbar';
+import './Modal.css';
+import './BookList.css'; // Import the new CSS file
 
 const BookList = () => {
   const [books, setBooks] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedBook, setSelectedBook] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(5); // Adjust the number of items per page as needed
+  const [itemsPerPage] = useState(10);
+  const [hasSearched, setHasSearched] = useState(false);
 
-  const fetchData = async () => {
-    try {
-      const response = await axios.get(
-        `https://openlibrary.org/search.json?q=${searchTerm}`
-      );
-      setBooks(response.data.docs);
-      setCurrentPage(1); // Reset to the first page when a new search is performed
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
-
-  const handleSearch = (event) => {
+  useEffect(() => {
+    // Fetch data from the Open Library API for popular books (no specific genre) with cover images
+    fetch('https://openlibrary.org/subjects/popular.json?limit=10')
+      .then((response) => response.json())
+      .then((data) => {
+        // Extract relevant information from the API response
+        const booksWithCovers = data.works
+          .filter((work) => work.cover_edition_key) // Filter out works without cover images
+          .map((work) => ({
+            key: work.cover_edition_key,
+            title: work.title,
+            cover_i: null, // You can set this to null or fetch cover_i using another API endpoint
+          }));
+        setBooks(booksWithCovers);
+      })
+      .catch((error) => console.error('Error fetching data:', error));
+  }, []);
+  
+  const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
 
-  const handleSearchButtonClick = () => {
-    fetchData();
+  const handleSearchSubmit = () => {
+    const query = `https://openlibrary.org/search.json?q=${searchTerm}`;
+
+    // Fetch the data from the API
+    fetch(query)
+      .then((response) => response.json())
+      .then((data) => {
+        setBooks(data.docs);
+        setHasSearched(true);
+      })
+      .catch((error) => console.error('Error fetching data:', error));
   };
 
   const handleViewDetails = (book) => {
@@ -37,41 +61,96 @@ const BookList = () => {
     setSelectedBook(null);
   };
 
+  const toggleDetails = (book) => {
+    setSelectedBook(selectedBook === book ? null : book);
+  };
+
   const indexOfLastBook = currentPage * itemsPerPage;
   const indexOfFirstBook = indexOfLastBook - itemsPerPage;
   const currentBooks = books.slice(indexOfFirstBook, indexOfLastBook);
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
+    setSelectedBook(null);
   };
+
+  const noCoverImageUrl = 'https://via.placeholder.com/200x300.png'; // Replace with your actual "no cover" image URL
+
+  const sliderSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 5,
+    slidesToScroll: 1,
+  };
+
 
   return (
     <div>
-      <h2>Search Books</h2>
-      <input
-        type="text"
-        id="searchInput"
-        placeholder="Enter your search query"
-        value={searchTerm}
-        onChange={handleSearch}
+      <Navbar
+        searchTerm={searchTerm}
+        onSearchChange={handleSearchChange}
+        onSearchSubmit={handleSearchSubmit}
       />
-      <button onClick={handleSearchButtonClick}>Search</button>
-      <ul>
-        {currentBooks.map((book) => (
-          <li key={book.key}>
-            <h3>{book.title}</h3>
-            {book.cover_i && (
-              <img
-                src={`http://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`}
-                alt={`Cover for ${book.title}`}
-              />
-            )}
-            <button onClick={() => handleViewDetails(book)}>
-              View Details
-            </button>
-          </li>
-        ))}
-      </ul>
+      {!hasSearched && (
+        <>
+          <div className="carousel-container">
+            <h2>Featured Books</h2>
+            <Slider {...sliderSettings}>
+              {books.map((book) => (
+                <div key={book.key} className="carousel-item">
+                  <img
+                    src={`https://covers.openlibrary.org/b/olid/${book.key}-M.jpg`}
+                    alt={`Cover for ${book.title}`}
+                    className="cover-image"
+                  />
+                  <p>{book.title}</p>
+                </div>
+              ))}
+            </Slider>
+          </div>
+        </>
+      )}
+      {hasSearched && books.length === 0 && (
+        <p>No books found. Please try a different search term.</p>
+      )}
+      {hasSearched && books.length > 0 && (
+        <div className="carousel-container">
+            <ul>
+              {currentBooks.map((book) => (
+                <li key={book.key} className="book-container">
+                    <p><b>{book.title}</b><br />
+                    <small>by {book.author_name ? book.author_name.join(', ') : 'Unknown'} | Star Reviews: {book.ratings_average ? Math.round(book.ratings_average * 100) / 100 : 'N/A'} | Edition count: {book.edition_count}</small></p>
+                  <div className="book-info">
+                    <div className="book-details">
+                      {book.cover_i ? (
+                        <img
+                          src={`https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`}
+                          alt={`Cover for ${book.title}`}
+                          className="cover-image"
+                        />
+                      ) : (
+                        <img
+                          src={noCoverImageUrl}
+                          alt="No Cover"
+                        />
+                      )}
+                      <div className="book-text">
+                        <button onClick={() => toggleDetails(book)}>
+                          {selectedBook === book ? 'Hide Details' : 'View Details'}
+                        </button>
+                        <div>
+                          {selectedBook === book && <BookDetails book={book} />}
+                        </div>
+                      </div>
+                      {/* Conditionally render the details based on the button click */}
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+            </div>
+      )}
       {books.length > itemsPerPage && (
         <nav>
           <ul className="pagination">
@@ -90,12 +169,6 @@ const BookList = () => {
             )}
           </ul>
         </nav>
-      )}
-      {selectedBook && (
-        <div>
-          <BookDetails book={selectedBook} />
-          <button onClick={handleCloseDetails}>Close Details</button>
-        </div>
       )}
     </div>
   );
