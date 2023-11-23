@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/yellowbookbag/precache-manifest.6ccb59aae57eb11b518a582960db71d1.js"
+  "/yellowbookbag/precache-manifest.7dea015dcd905d4a130052151cb7211f.js"
 );
 
 self.addEventListener('message', (event) => {
