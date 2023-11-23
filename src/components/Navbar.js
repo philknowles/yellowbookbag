@@ -11,6 +11,7 @@ const Navbar = ({ searchTerm, onSearchChange, onSearchSubmit }) => {
   };
 
   const currentURL = window.location.pathname
+  console.log(currentURL);
 
   return (
     <nav className="navbar">
