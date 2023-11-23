@@ -38,6 +38,10 @@ const BookList = () => {
       .catch((error) => console.error('Error fetching data:', error));
   }, []);
   
+  const handleScan = (isbn) => {
+    setSearchTerm(isbn);
+  };
+
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
@@ -98,6 +102,7 @@ const BookList = () => {
         <>
         {/* Include the HeroSection component */}
           <HeroSection />
+          {/* Include the ISBNScanner component */}
           <div className="carousel-container">
             <h2>New Books</h2>
             <Slider {...sliderSettings}>
