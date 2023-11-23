@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import BookDetails from './BookDetails';
 import Navbar from './Navbar';
+import HeroSection from './HeroSection';
 import './Modal.css';
 import './BookList.css'; // Import the new CSS file
 
@@ -20,18 +21,19 @@ const BookList = () => {
 
   useEffect(() => {
     // Fetch data from the Open Library API for popular books (no specific genre) with cover images
-    fetch('https://openlibrary.org/subjects/popular.json?limit=10')
+    fetch('https://openlibrary.org/subjects/new.json?limit=10')
       .then((response) => response.json())
       .then((data) => {
-        // Extract relevant information from the API response
-        const booksWithCovers = data.works
+        // Filter out works with the "romance" genre
+        const booksWithoutRomance = data.works
+          .filter((work) => !work.subject.includes('/subjects/romance'))
           .filter((work) => work.cover_edition_key) // Filter out works without cover images
           .map((work) => ({
             key: work.cover_edition_key,
             title: work.title,
             cover_i: null, // You can set this to null or fetch cover_i using another API endpoint
           }));
-        setBooks(booksWithCovers);
+        setBooks(booksWithoutRomance);
       })
       .catch((error) => console.error('Error fetching data:', error));
   }, []);
@@ -94,8 +96,10 @@ const BookList = () => {
       />
       {!hasSearched && (
         <>
+        {/* Include the HeroSection component */}
+          <HeroSection />
           <div className="carousel-container">
-            <h2>Featured Books</h2>
+            <h2>New Books</h2>
             <Slider {...sliderSettings}>
               {books.map((book) => (
                 <div key={book.key} className="carousel-item">
