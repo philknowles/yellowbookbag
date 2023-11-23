@@ -11,7 +11,6 @@ const Navbar = ({ searchTerm, onSearchChange, onSearchSubmit }) => {
   };
 
   const currentURL = window.location.pathname
-  console.log(currentURL);
 
   return (
     <nav className="navbar">
@@ -27,7 +26,7 @@ const Navbar = ({ searchTerm, onSearchChange, onSearchSubmit }) => {
             <button onClick={() => navigateTo('/about')}>About</button>
           </li>
         </ul>
-        {currentURL === "/" || currentURL === "yellowbookbag/" ? 
+        {currentURL === "/" || currentURL === "/yellowbookbag/" ? 
           <input
             type="text"
             id="searchInput"
