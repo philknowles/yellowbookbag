@@ -1,0 +1,24 @@
+/* HeroSection.css */
+
+.hero-section {
+  height: 400px; /* Adjust the height as needed */
+  text-align: center;
+  padding: 50px;
+  background-color: #f8f9fa; /* Optional background color */
+}
+
+.hero-section img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.hero-section h1 {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+}
+
+.hero-section p {
+  font-size: 1.2em;
+  color: #495057; /* Optional text color */
+}
