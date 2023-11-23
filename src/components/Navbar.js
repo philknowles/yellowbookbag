@@ -1,7 +1,8 @@
 // Navbar.js
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
+import BarcodeScanner from './BarcodeScanner';
 
 const Navbar = ({ searchTerm, onSearchChange, onSearchSubmit }) => {
   const navigate = useNavigate();
@@ -10,9 +11,22 @@ const Navbar = ({ searchTerm, onSearchChange, onSearchSubmit }) => {
     navigate(path);
   };
 
+  const [scannedBarcode, setScannedBarcode] = useState('');
+
+  const handleBarcodeScanned = (barcode) => {
+    setScannedBarcode(barcode);
+  };
+
+  const handleSearchInApp = () => {
+    // Perform a custom action with the scanned barcode, such as searching within your application
+    console.log('Search in app for ISBN:', scannedBarcode);
+    // You can implement your own logic here, e.g., navigating to a book details page.
+  };
+
   const currentURL = window.location.pathname
 
   return (
+    
     <nav className="navbar">
       <div className="navbar-title">
         <h2>The Yellow Book Bag</h2>
@@ -26,6 +40,16 @@ const Navbar = ({ searchTerm, onSearchChange, onSearchSubmit }) => {
             <button onClick={() => navigateTo('/about')}>About</button>
           </li>
         </ul>
+        <div>
+      <BarcodeScanner onBarcodeScanned={handleBarcodeScanned} />
+      <input
+        type="text"
+        value={scannedBarcode}
+        placeholder="Scanned Barcode"
+        onChange={() => {}}
+      />
+      <button onClick={handleSearchInApp}>Search in App</button>
+    </div>
         {currentURL === "/" || currentURL === "/yellowbookbag/" ? 
           <input
             type="text"
