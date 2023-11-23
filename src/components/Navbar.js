@@ -35,7 +35,7 @@ const Navbar = ({ searchTerm, onSearchChange, onSearchSubmit }) => {
             onChange={onSearchChange}
           />
         : ''}
-        {currentURL === "/" ? 
+        {currentURL === "/" || currentURL === "/yellowbookbag/" ? 
           <button onClick={onSearchSubmit}>
             <i className="fas fa-search"></i> {/* Magnifying glass icon */}
           </button>
