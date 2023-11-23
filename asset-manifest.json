@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/yellowbookbag/static/css/main.345f8fc1.chunk.css",
-    "main.js": "/yellowbookbag/static/js/main.f406234a.chunk.js",
-    "main.js.map": "/yellowbookbag/static/js/main.f406234a.chunk.js.map",
-    "runtime~main.js": "/yellowbookbag/static/js/runtime~main.f493f4d6.js",
-    "runtime~main.js.map": "/yellowbookbag/static/js/runtime~main.f493f4d6.js.map",
+    "main.css": "/yellowbookbag/static/css/main.04b2b8ce.chunk.css",
+    "main.js": "/yellowbookbag/static/js/main.fcb93de4.chunk.js",
+    "main.js.map": "/yellowbookbag/static/js/main.fcb93de4.chunk.js.map",
+    "runtime~main.js": "/yellowbookbag/static/js/runtime~main.080e0504.js",
+    "runtime~main.js.map": "/yellowbookbag/static/js/runtime~main.080e0504.js.map",
     "static/css/2.f2f77650.chunk.css": "/yellowbookbag/static/css/2.f2f77650.chunk.css",
     "static/js/2.b3ea665c.chunk.js": "/yellowbookbag/static/js/2.b3ea665c.chunk.js",
     "static/js/2.b3ea665c.chunk.js.map": "/yellowbookbag/static/js/2.b3ea665c.chunk.js.map",
-    "static/js/3.5d4f8254.chunk.js": "/yellowbookbag/static/js/3.5d4f8254.chunk.js",
-    "static/js/3.5d4f8254.chunk.js.map": "/yellowbookbag/static/js/3.5d4f8254.chunk.js.map",
+    "static/js/3.d3e4d6ea.chunk.js": "/yellowbookbag/static/js/3.d3e4d6ea.chunk.js",
+    "static/js/3.d3e4d6ea.chunk.js.map": "/yellowbookbag/static/js/3.d3e4d6ea.chunk.js.map",
     "index.html": "/yellowbookbag/index.html",
-    "precache-manifest.94b8b0eddbe0dc04a5f27872344651e7.js": "/yellowbookbag/precache-manifest.94b8b0eddbe0dc04a5f27872344651e7.js",
+    "precache-manifest.1208042429e5f20568fb1caf4eea21c6.js": "/yellowbookbag/precache-manifest.1208042429e5f20568fb1caf4eea21c6.js",
     "service-worker.js": "/yellowbookbag/service-worker.js",
     "static/css/2.f2f77650.chunk.css.map": "/yellowbookbag/static/css/2.f2f77650.chunk.css.map",
-    "static/css/main.345f8fc1.chunk.css.map": "/yellowbookbag/static/css/main.345f8fc1.chunk.css.map",
+    "static/css/main.04b2b8ce.chunk.css.map": "/yellowbookbag/static/css/main.04b2b8ce.chunk.css.map",
     "static/media/slick-theme.css": "/yellowbookbag/static/media/slick.f97e3bbf.svg"
   }
 }
