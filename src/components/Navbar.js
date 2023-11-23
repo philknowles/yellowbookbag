@@ -26,7 +26,7 @@ const Navbar = ({ searchTerm, onSearchChange, onSearchSubmit }) => {
             <button onClick={() => navigateTo('/about')}>About</button>
           </li>
         </ul>
-        {currentURL === "/" ? 
+        {currentURL === "/" || currentURL === "yellowbookbag/" ? 
           <input
             type="text"
             id="searchInput"
