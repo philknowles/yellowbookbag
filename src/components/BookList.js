@@ -38,7 +38,6 @@ const BookList = () => {
       .catch((error) => console.error('Error fetching data:', error));
   }, []);
   
-  
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
