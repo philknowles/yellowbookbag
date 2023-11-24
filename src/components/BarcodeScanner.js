@@ -2,38 +2,47 @@
 
 import React, { useEffect } from 'react';
 import Quagga from 'quagga';
+import './BarcodeScanner.css'; // Import a CSS file for styling
 
 const BarcodeScanner = ({ onBarcodeScanned }) => {
   useEffect(() => {
-    Quagga.init({
-      inputStream: {
-        name: 'Live',
-        type: 'LiveStream',
-        target: document.querySelector('#barcode-scanner'),
-      },
-      decoder: {
-        readers: ['ean_reader'],
-      },
-    }, (err) => {
-      if (err) {
-        console.error('Error initializing Quagga:', err);
-        return;
-      }
-      Quagga.start();
-    });
+    const isMobile = window.innerWidth <= 768;
 
-    Quagga.onDetected((result) => {
-      const scannedBarcode = result.codeResult.code;
-      onBarcodeScanned(scannedBarcode);
-      Quagga.stop();
-    });
+    if (isMobile) {
+      Quagga.init({
+        inputStream: {
+          name: 'Live',
+          type: 'LiveStream',
+          target: document.querySelector('#barcode-scanner'),
+        },
+        decoder: {
+          readers: ['ean_reader'],
+        },
+      }, (err) => {
+        if (err) {
+          console.error('Error initializing Quagga:', err);
+          return;
+        }
+        Quagga.start();
+      });
 
-    return () => {
-      Quagga.stop();
-    };
+      Quagga.onDetected((result) => {
+        const scannedBarcode = result.codeResult.code;
+        onBarcodeScanned(scannedBarcode);
+        Quagga.stop();
+      });
+
+      return () => {
+        Quagga.stop();
+      };
+    }
   }, [onBarcodeScanned]);
 
-  return <div id="barcode-scanner"></div>;
+  return (
+    <div>
+      {window.innerWidth <= 768 && <div id="barcode-scanner"></div>}
+    </div>
+  );
 };
 
 export default BarcodeScanner;
