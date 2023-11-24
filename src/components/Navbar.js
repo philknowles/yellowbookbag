@@ -1,4 +1,3 @@
-// Navbar.js
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
@@ -6,11 +5,6 @@ import BarcodeScanner from './BarcodeScanner';
 
 const Navbar = ({ searchTerm, onSearchChange, onSearchSubmit }) => {
   const navigate = useNavigate();
-
-  const navigateTo = (path) => {
-    navigate(path);
-  };
-
   const [scannedBarcode, setScannedBarcode] = useState('');
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
@@ -31,15 +25,13 @@ const Navbar = ({ searchTerm, onSearchChange, onSearchSubmit }) => {
   };
 
   const handleSearchInApp = () => {
-    // Perform a custom action with the scanned barcode, such as searching within your application
     console.log('Search in app for ISBN:', scannedBarcode);
-    // You can implement your own logic here, e.g., navigating to a book details page.
+    // Perform any additional logic, such as searching within your application
   };
 
-  const currentURL = window.location.pathname
+  const currentURL = window.location.pathname;
 
   return (
-    
     <nav className="navbar">
       <div className="navbar-title">
         <h2>The Yellow Book Bag</h2>
@@ -47,30 +39,26 @@ const Navbar = ({ searchTerm, onSearchChange, onSearchSubmit }) => {
       <div className="navbar-search">
         <ul className="navbar-list">
           <li>
-            <button onClick={() => navigateTo('/')}>Home</button>
+            <button onClick={() => navigate('/')}>Home</button>
           </li>
           <li>
-            <button onClick={() => navigateTo('/about')}>About</button>
+            <button onClick={() => navigate('/about')}>About</button>
           </li>
         </ul>
-        <div>
-      </div>
-      {currentURL === "/" || currentURL === "/yellowbookbag/" ? (
-            isMobile ? (
+        {currentURL === '/' || currentURL === '/yellowbookbag/' ? (
+          isMobile ? (
+            <div>
               <BarcodeScanner onBarcodeScanned={handleBarcodeScanned} />
-            ) : (
-              <div>
-                <input
-                  type="text"
-                  value={scannedBarcode}
-                  placeholder="Scanned Barcode"
-                  onChange={() => {}}
-                />
-                <button onClick={handleSearchInApp}>
-                  <i className="fas fa-search"></i> {/* Magnifying glass icon */}
-                </button>
-              </div>
-            )
+              <input
+                type="text"
+                value={scannedBarcode}
+                placeholder="Enter ISBN..."
+                onChange={() => {}}
+              />
+              <button onClick={handleSearchInApp}>
+                <i className="fas fa-search"></i> {/* Magnifying glass icon */}
+              </button>
+            </div>
           ) : (
             <>
               <input
@@ -84,7 +72,8 @@ const Navbar = ({ searchTerm, onSearchChange, onSearchSubmit }) => {
                 <i className="fas fa-search"></i> {/* Magnifying glass icon */}
               </button>
             </>
-          )}
+          )
+        ) : null}
       </div>
     </nav>
   );
