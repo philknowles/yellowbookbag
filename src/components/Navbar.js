@@ -87,6 +87,7 @@ const Navbar = ({ searchTerm, onSearchChange, onSearchSubmit }) => {
                   <input
                     type="text"
                     placeholder="Scan ISBN..."
+                    value={scannedBarcode}
                     onChange={onSearchChange}
                     onClick={handleSearchFieldClick}
                   />
