@@ -26,7 +26,7 @@ const Navbar = ({ searchTerm, onSearchChange, onSearchSubmit }) => {
   }, []);
 
   const handleBarcodeScanned = (barcode) => {
-    alert('Scanned barcode', barcode);
+    alert('Scanned barcode: ' + barcode);
     setScannedBarcode(barcode);
     setBarcodeCaptured(true);
     setShowVideo(false);

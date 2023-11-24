@@ -1,31 +1,31 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "a95834c143dac16f1d16343cb44080ab",
+    "revision": "7f0f87ccc09580064f254ef412b5aa47",
     "url": "/yellowbookbag/index.html"
   },
   {
-    "revision": "fa91a39f9d4d82912532",
+    "revision": "415746799412d3a3f2d3",
     "url": "/yellowbookbag/static/css/2.f2f77650.chunk.css"
   },
   {
-    "revision": "abb945fa35ddae53098f",
-    "url": "/yellowbookbag/static/css/main.7a217063.chunk.css"
+    "revision": "4e3fc82b39de1f1afad1",
+    "url": "/yellowbookbag/static/css/main.4e4afef5.chunk.css"
   },
   {
-    "revision": "fa91a39f9d4d82912532",
-    "url": "/yellowbookbag/static/js/2.b3ea665c.chunk.js"
+    "revision": "415746799412d3a3f2d3",
+    "url": "/yellowbookbag/static/js/2.fcefcf79.chunk.js"
   },
   {
-    "revision": "29fe86816a802490cec5",
-    "url": "/yellowbookbag/static/js/3.d3e4d6ea.chunk.js"
+    "revision": "a46f58956e3b48cc08a8",
+    "url": "/yellowbookbag/static/js/3.1629fdc3.chunk.js"
   },
   {
-    "revision": "abb945fa35ddae53098f",
-    "url": "/yellowbookbag/static/js/main.23b23eab.chunk.js"
+    "revision": "4e3fc82b39de1f1afad1",
+    "url": "/yellowbookbag/static/js/main.a927f65b.chunk.js"
   },
   {
-    "revision": "e0f78930fadacef86bf9",
-    "url": "/yellowbookbag/static/js/runtime~main.080e0504.js"
+    "revision": "452b5ab5a2587c2dad46",
+    "url": "/yellowbookbag/static/js/runtime~main.fa11cc07.js"
   },
   {
     "revision": "b7c9e1e479de3b53f1e4e30ebac2403a",
