@@ -4,10 +4,28 @@
 @media (max-width: 768px) {
   #barcode-scanner {
     position: fixed;
-    top: 0;
+    top: 70px;
     left: 0;
+    right:0;
+    bottom:0;
     width: 100%;
     height: 100%;
-    z-index: 9999;
+    z-index: 1000;
   }
+}
+
+.video-container {
+  position:relative;
+}
+
+.close-video-btn {
+  position: absolute;
+  top: 25px;
+  right: 55px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 1100; /* Ensure it's above the video */
 }
