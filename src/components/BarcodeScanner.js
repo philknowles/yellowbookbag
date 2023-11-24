@@ -1,85 +1,46 @@
 // BarcodeScanner.js
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Quagga from 'quagga';
+import './BarcodeScanner.css'; // Import a CSS file for styling
 
 const BarcodeScanner = ({ onBarcodeScanned }) => {
-  const [showVideo, setShowVideo] = useState(true);
-  const [manualInput, setManualInput] = useState('');
-
   useEffect(() => {
-    const initScanner = async () => {
-      try {
-        await Quagga.init({
-          inputStream: {
-            name: 'Live',
-            type: 'LiveStream',
-            target: document.querySelector('#barcode-scanner'),
-            constraints: {
-              width: window.innerWidth,
-              height: window.innerHeight,
-            },
-          },
-          decoder: {
-            readers: ['ean_reader'],
-          },
-        });
+    const isMobile = window.innerWidth <= 768;
 
-        Quagga.onDetected((result) => {
-          const scannedBarcode = result.codeResult.code;
-          onBarcodeScanned(scannedBarcode);
-          setShowVideo(false); // Turn off video after scanning
-          Quagga.stop();
-        });
-
+    if (isMobile) {
+      Quagga.init({
+        inputStream: {
+          name: 'Live',
+          type: 'LiveStream',
+          target: document.querySelector('#barcode-scanner'),
+        },
+        decoder: {
+          readers: ['ean_reader'],
+        },
+      }, (err) => {
+        if (err) {
+          console.error('Error initializing Quagga:', err);
+          return;
+        }
         Quagga.start();
+      });
 
-        // Clean up when the component is unmounted
-        return () => {
-          Quagga.stop();
-        };
-      } catch (error) {
-        console.error('Error initializing Quagga:', error);
-      }
-    };
+      Quagga.onDetected((result) => {
+        const scannedBarcode = result.codeResult.code;
+        onBarcodeScanned(scannedBarcode);
+        Quagga.stop();
+      });
 
-    if (showVideo) {
-      initScanner();
+      return () => {
+        Quagga.stop();
+      };
     }
-
-    return () => {
-      // Clean up if the component is unmounted
-      Quagga.stop();
-    };
-  }, [onBarcodeScanned, showVideo]);
-
-  const handleManualInputChange = (event) => {
-    setManualInput(event.target.value);
-  };
-
-  const handleManualInputSubmit = (event) => {
-    event.preventDefault();
-    onBarcodeScanned(manualInput);
-    setManualInput('');
-  };
+  }, [onBarcodeScanned]);
 
   return (
     <div>
-      {showVideo ? (
-        <div id="barcode-scanner"></div>
-      ) : (
-        <form onSubmit={handleManualInputSubmit}>
-          <label>
-            Manual Input:
-            <input
-              type="text"
-              value={manualInput}
-              onChange={handleManualInputChange}
-            />
-          </label>
-          <button type="submit">Submit</button>
-        </form>
-      )}
+      {window.innerWidth <= 768 && <div id="barcode-scanner"></div>}
     </div>
   );
 };
