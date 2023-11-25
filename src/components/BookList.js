@@ -14,6 +14,7 @@ import './BookList.css'; // Import the new CSS file
 const BookList = () => {
   const [books, setBooks] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  // const [scannedBarcode, setScannedBarcode] = useState('');
   const [selectedBook, setSelectedBook] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);
@@ -48,6 +49,7 @@ const BookList = () => {
 
   const handleSearchSubmit = () => {
     const query = `https://openlibrary.org/search.json?q=${searchTerm}`;
+    console.log("Query String: " + query);
 
     // Fetch the data from the API
     fetch(query)
@@ -57,8 +59,32 @@ const BookList = () => {
         setHasSearched(true);
       })
       .catch((error) => console.error('Error fetching data:', error));
+
   };
 
+  // const handleSearchSubmit = () => {
+  //   console.log('Search in app for ISBN:', scannedBarcode);
+  
+  //   const query = `https://openlibrary.org/search.json?q=${scannedBarcode}`;
+  
+  //   // Fetch the data from the API
+  //   fetch(query)
+  //     .then((response) => {
+  //       if (!response.ok) {
+  //         throw new Error(`HTTP error! Status: ${response.status}`);
+  //       }
+  //       return response.json();
+  //     })
+  //     .then((data) => {
+  //       setBooks(data.docs);
+  //       setHasSearched(true);
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error fetching data:', error.message);
+  //       // Handle the error, e.g., display a user-friendly message
+  //     });
+  // };
+  
   const handleViewDetails = (book) => {
     setSelectedBook(book);
   };
@@ -98,6 +124,11 @@ const BookList = () => {
         onSearchChange={handleSearchChange}
         onSearchSubmit={handleSearchSubmit}
       />
+      {/* <Navbar
+        scannedBarcode={scannedBarcode}
+        onSearchChange={handleSearchChange}
+        onSearchSubmit={handleSearchSubmit}
+      /> */}
       {!hasSearched && (
         <>
         {/* Include the HeroSection component */}
