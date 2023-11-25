@@ -67,13 +67,12 @@ const Navbar = ({ searchTerm, onSearchChange, onSearchSubmit }) => {
     <>
       <nav className="navbar">
         <div className="navbar-title">
-          <h2>The Yellow Book Bag</h2>
+          <Link to="/">
+              <h2>The Yellow Book Bag</h2>
+          </Link>
         </div>
         <div className="navbar-search">
           <ul className="navbar-list">
-            <li>
-              <button onClick={() => navigate('/')}>Home</button>
-            </li>
             <li>
               <button onClick={() => navigate('/about')}>About</button>
             </li>
