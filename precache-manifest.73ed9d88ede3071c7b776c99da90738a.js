@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "3afe605046ce0c840c3aadced0a235f9",
+    "revision": "1b2b4f386630d000cf0457d57d971770",
     "url": "/yellowbookbag/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/yellowbookbag/static/css/2.f2f77650.chunk.css"
   },
   {
-    "revision": "1f31457cedfc2dc952ac",
+    "revision": "6405747b299448880d89",
     "url": "/yellowbookbag/static/css/main.4e4afef5.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/yellowbookbag/static/js/3.1629fdc3.chunk.js"
   },
   {
-    "revision": "1f31457cedfc2dc952ac",
-    "url": "/yellowbookbag/static/js/main.5e57f944.chunk.js"
+    "revision": "6405747b299448880d89",
+    "url": "/yellowbookbag/static/js/main.20244fcc.chunk.js"
   },
   {
     "revision": "452b5ab5a2587c2dad46",
