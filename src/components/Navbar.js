@@ -5,13 +5,11 @@ import BarcodeScanner from './BarcodeScanner';
 
 const Navbar = ({ searchTerm, onSearchChange, onSearchSubmit }) => {
   const navigate = useNavigate();
-  const [scannedBarcode, setScannedBarcode] = useState('');
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [showVideo, setShowVideo] = useState(false);
   const [barcodeCaptured, setBarcodeCaptured] = useState(false);
   const [books, setBooks] = useState([]);
   const [hasSearched, setHasSearched] = useState(false);
-
 
   useEffect(() => {
     const handleResize = () => {
@@ -26,15 +24,15 @@ const Navbar = ({ searchTerm, onSearchChange, onSearchSubmit }) => {
   }, []);
 
   const handleBarcodeScanned = (barcode) => {
-    alert('Scanned barcode', barcode);
-    setScannedBarcode(barcode);
+    console.log('Scanned barcode:', barcode);
     setBarcodeCaptured(true);
     setShowVideo(false);
+    onSearchChange({ target: { value: barcode } }); // Update searchTerm with scanned barcode
   };
 
   const handleSearchInApp = () => {
-    console.log('Search in app for ISBN:', scannedBarcode);
-    const query = `https://openlibrary.org/search.json?q=${scannedBarcode}`;
+    console.log('Search in app for ISBN:', searchTerm);
+    const query = `https://openlibrary.org/search.json?q=${searchTerm}`;
 
     // Fetch the data from the API
     fetch(query)
@@ -45,8 +43,7 @@ const Navbar = ({ searchTerm, onSearchChange, onSearchSubmit }) => {
         return response.json();
       })
       .then((data) => {
-        setBooks(data.docs);
-        setHasSearched(true);
+        onSearchSubmit(); // Call the provided onSearchSubmit prop
       })
       .catch((error) => {
         console.error('Error fetching data:', error.message);
@@ -88,20 +85,21 @@ const Navbar = ({ searchTerm, onSearchChange, onSearchSubmit }) => {
                   <input
                     type="text"
                     placeholder="Scan ISBN..."
-                    value={scannedBarcode}
+                    value={searchTerm}
                     onChange={onSearchChange}
                     onClick={handleSearchFieldClick}
                   />
                   {showVideo && (
                     <div className="video-container">
+                      {/* Assuming BarcodeScanner component works as expected */}
                       <BarcodeScanner onBarcodeScanned={handleBarcodeScanned} />
                       <button className="close-video-btn" onClick={handleVideoClose}>
-                        <i className="fas fa-times"></i> {/* Close icon */}
+                        <i className="fas fa-times"></i>
                       </button>
                     </div>
                   )}
                   <button onClick={onSearchSubmit}>
-                    <i className="fas fa-search"></i> {/* Magnifying glass icon */}
+                    <i className="fas fa-search"></i>
                   </button>
                 </div>
               </>
@@ -115,18 +113,13 @@ const Navbar = ({ searchTerm, onSearchChange, onSearchSubmit }) => {
                   onChange={onSearchChange}
                 />
                 <button onClick={onSearchSubmit}>
-                  <i className="fas fa-search"></i> {/* Magnifying glass icon */}
+                  <i className="fas fa-search"></i>
                 </button>
               </>
             )
           ) : null}
         </div>
       </nav>
-      {showVideo && !barcodeCaptured && (
-        <div className="video-container">
-          <BarcodeScanner onBarcodeScanned={handleBarcodeScanned} />
-        </div>
-      )}
     </>
   );
 };
