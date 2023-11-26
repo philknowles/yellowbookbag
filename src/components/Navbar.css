@@ -5,16 +5,39 @@
   align-items: center;
   background-color: #F2CD5D;
   padding: 0 15px;
-  color: #2A2036;
+  color: #6E5160;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+.hamburger .bar {
+  width: 30px;
+  height: 3px;
+  background-color: none;
+  margin: 6px 0;
 }
 
 .navbar-title {
   font-size: 1rem;
 }
 
-.navbar-search {
+.navbar-title a {
+  text-decoration:none;
+  color: #6E5160;
+}
+
+.navbar-search-container {
   display: flex;
   align-items: center;
+}
+.navbar-search {
+  position:relative;
 }
 
 .navbar-search input {
@@ -43,6 +66,35 @@
   font-size:20px;
 }
 
+.navbar-search .search-button {
+  position: absolute;
+  top: 8px;
+  right: 5%;
+}
+
+@media screen and (max-width: 768px) {
+  .navbar-search .search-button {
+    position: absolute !important;
+    top: 8px !important;
+    right: 10% !important;
+  }
+}
+
+
+.navbar-search .search-button .fa-search {
+  color:#000;
+}
+
+.navbar-list button {
+  padding: 5px 5px;
+  background-color: transparent;
+  color: white;
+  border: 0;
+  cursor: pointer;
+  font-size:20px;
+}
+
+
 /* Navbar.css */
 .navbar-list {
   list-style: none;
@@ -66,3 +118,17 @@
 
 
 /* Additional styling adjustments may be needed based on your layout */
+@media screen and (max-width:758px){
+  .navbar {
+    display: block;
+    text-align:center;
+    background-color: #F2CD5D;
+    padding: 5px 15px 15px;
+    color: #6E5160;
+  }
+  .navbar-search-container {
+    justify-content: center;
+    align-items: center;
+  }
+}
+
