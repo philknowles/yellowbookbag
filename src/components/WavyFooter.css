@@ -1,0 +1,40 @@
+/* WavyFooter.css */
+
+.footer-container {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  height: auto;
+  /* background-color: #F2CD5D; */
+}
+
+.waves {
+  width: 100%;
+  height: auto;
+}
+
+.parallax {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-content {
+  /* Add styling for your footer content */
+  position:absolute;
+  top:100px;
+  padding: 20px;
+}
+
+/* ParallaxSVG.css */
+.svg-container {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.svg-container svg {
+  width: 100%;
+  height: auto;
+  position: relative;
+  transform-origin: center bottom;
+  transition: transform 0.3s ease-out;
+}
