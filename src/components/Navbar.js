@@ -12,6 +12,8 @@ const Navbar = ({ searchTerm, onSearchChange, onSearchSubmit }) => {
   const [barcodeCaptured, setBarcodeCaptured] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
+  const currentURL = window.location.pathname;
+
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
@@ -49,7 +51,6 @@ const Navbar = ({ searchTerm, onSearchChange, onSearchSubmit }) => {
     navigate(path);
   };
 
-  const currentURL = window.location.pathname;
 
   return (
     <>
