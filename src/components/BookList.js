@@ -1,6 +1,7 @@
 // BookList.js
 import React, { useState, useEffect } from 'react';
 import SliderComponent from './Slider';
+import ChildrensBooks from './ChildrensBooks';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { Link } from 'react-router-dom';
@@ -102,6 +103,9 @@ const BookList = () => {
             <h2>New Books</h2>
             {/* Use the SliderComponent here */}
             <SliderComponent books={books} isMobile={isMobile} />
+          </div>
+          <div className="">
+            <ChildrensBooks books={books} />
           </div>
         </>
       )}
