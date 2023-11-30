@@ -1,6 +1,6 @@
 // BookList.js
 import React, { useState, useEffect } from 'react';
-import Slider from 'react-slick';
+import SliderComponent from './Slider';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { Link } from 'react-router-dom';
@@ -87,23 +87,6 @@ const BookList = () => {
 
   const noCoverImageUrl = 'https://via.placeholder.com/200x300.png'; // Replace with your actual "no cover" image URL
 
-  const sliderSettings = isMobile
-  ? {
-      dots: true,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-    }
-  : {
-      dots: true,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 5,
-      slidesToScroll: 1,
-    };
-
-
   return (
     <div>
       <Navbar
@@ -117,18 +100,8 @@ const BookList = () => {
           <HeroSection />
           <div className="carousel-container">
             <h2>New Books</h2>
-            <Slider {...sliderSettings}>
-              {books.map((book) => (
-                <div key={book.key} className="carousel-item">
-                  <img
-                    src={`https://covers.openlibrary.org/b/olid/${book.key}-M.jpg`}
-                    alt={`Cover for ${book.title}`}
-                    className="cover-image"
-                  />
-                  <p>{book.title}</p>
-                </div>
-              ))}
-            </Slider>
+            {/* Use the SliderComponent here */}
+            <SliderComponent books={books} isMobile={isMobile} />
           </div>
         </>
       )}

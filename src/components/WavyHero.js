@@ -6,7 +6,7 @@ const WavyHero = () => {
     <div className="hero-section">
       <div className="hero-text">
         <h1>What's in Your Book Bag?</h1>
-        <p>Some additional information...</p>
+        <p><button className="button-color">Get Started</button></p>
       </div>
       <svg className="waves" xmlns="http://www.w3.org/2000/svg" viewBox="15 24 90 30" preserveAspectRatio="none" shapeRendering="auto">
         <defs>
