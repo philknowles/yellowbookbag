@@ -8,7 +8,7 @@ import BookDetails from './BookDetails'; // Import your BookDetails component
 const TrendingBooks = () => {
   const [trendingBooks, setTrendingBooks] = useState([]);
   const [selectedBook, setSelectedBook] = useState(null);
-  const targetSubject = 'Romance';
+  const targetSubjects = ['Romance', 'Erotica', 'Sexuality'];
 
   useEffect(() => {
     // Fetch data from the Open Library API for trending books with cover images
@@ -17,7 +17,7 @@ const TrendingBooks = () => {
       .then((data) => {
         const subjects = data.works
         const trendingBooksData = data.works
-          .filter((work) => !work.subject.includes(targetSubject))
+          .filter((work) => !work.subject.some((subject) => targetSubjects.includes(subject)))
           .filter((work) => work.cover_edition_key)
           .map((work) => ({
             key: work.cover_edition_key,
@@ -54,7 +54,7 @@ const TrendingBooks = () => {
         {trendingBooks.map((book) => (
           <div key={book.key} className="carousel-item">
             <img
-              src={`https://covers.openlibrary.org/b/olid/${book.key}-M.jpg`}
+              src={`https://covers.openlibrary.org/b/olid/${book.key}-L.jpg`}
               alt={`Cover for ${book.title}`}
               className="cover-image"
               onClick={() => handleViewDetails(book)}
