@@ -12,6 +12,7 @@ import WavyFooter from './WavyFooter';
 import HeroSection from './HeroSection';
 import './Modal.css';
 import './BookList.css'; // Import the new CSS file
+import TrendingBooks from './TrendingBooks';
 
 const BookList = () => {
   const [books, setBooks] = useState([]);
@@ -108,6 +109,7 @@ const BookList = () => {
           <div className="">
             <ChildrensBooks books={books} />
           </div>
+          <TrendingBooks />
         </>
       )}
       {hasSearched && books.length === 0 && (
