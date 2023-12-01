@@ -10,6 +10,7 @@ import Navbar from './Navbar';
 import HeroSection from './HeroSection';
 import './Modal.css';
 import './BookList.css'; // Import the new CSS file
+import TrendingBooks from './TrendingBooks';
 
 const BookList = () => {
   const [books, setBooks] = useState([]);
@@ -130,6 +131,7 @@ const BookList = () => {
               ))}
             </Slider>
           </div>
+          <TrendingBooks />
         </>
       )}
       {hasSearched && books.length === 0 && (
