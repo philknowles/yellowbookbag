@@ -4,23 +4,17 @@ import './WavyHero.css'; // Make sure to import your CSS file for styling
 const WavyHero = () => {
   return (
     <div className="hero-section">
-      <div className="hero-text">
-        <h1>What's in Your Book Bag?</h1>
-        <p><button className="button-color">Get Started</button></p>
+      <div className="hero-container">
+        <div className="hero-text">
+          
+          <h1>What's in Your Book Bag?</h1>
+          <p><button className="button-color">Get Started</button></p>
+        </div>
+        <div className="hero-image">
+          <img className="hero_image" src="./mascot_hero.jpg" />
+        </div>
+        {/* <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#F2CD5D" fill-opacity="0.67" d="M0,96L60,133.3C120,171,240,245,360,245.3C480,245,600,171,720,149.3C840,128,960,160,1080,170.7C1200,181,1320,171,1380,165.3L1440,160L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"></path></svg> */}
       </div>
-      <svg className="waves" xmlns="http://www.w3.org/2000/svg" viewBox="15 24 90 30" preserveAspectRatio="none" shapeRendering="auto">
-        <defs>
-          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
-        </defs>
-        <g className="parallax">
-          <use xlinkHref="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7)" />
-          <use xlinkHref="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
-          <use xlinkHref="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
-          <use xlinkHref="#gentle-wave" x="48" y="7" fill="#fff" />
-          {/* Adding mountains */}
-          {/* <image href="https://theyellowbookbag.codependentllc.com/assets/images/bg-hero-kids.jpg" x="30" y="10" width="40" height="40" /> */}
-        </g>
-      </svg>
     </div>
   );
 };

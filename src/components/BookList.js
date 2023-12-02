@@ -13,6 +13,7 @@ import HeroSection from './HeroSection';
 import './Modal.css';
 import './BookList.css'; // Import the new CSS file
 import TrendingBooks from './TrendingBooks';
+import GenreSection from './GenreSection';
 
 const BookList = () => {
   const [books, setBooks] = useState([]);

@@ -1,11 +1,14 @@
 /* Navbar.css */
 .navbar {
+  /* position:fixed;
+  width:99%; */
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #F2CD5D;
   padding: 0 15px;
   color: #6E5160;
+  z-index:9999;
 }
 
 .hamburger {
@@ -24,12 +27,14 @@
 }
 
 .navbar-title {
-  font-size: 1rem;
+  font-size: 1.7rem;
+  color:#342906;
+  font-family: 'Great Vibes', cursive;
 }
 
 .navbar-title a {
   text-decoration:none;
-  color: #6E5160;
+  color: #342906;
 }
 
 .navbar-search-container {

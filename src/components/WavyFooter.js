@@ -12,10 +12,7 @@ const WavyFooter = () => {
         transform={`translate(0, ${scrollY / 2}px)`}
       ></path>
     </svg> */}
-    <svg viewBox="0 -20 700 110" width="100%" preserveAspectRatio="none">
-      <path transform="translate(0, -20)" d="M0,10 c80,-22 240,0 350,18 c90,17 260,7.5 350,-20 v50 h-700" fill="#ffeaac" />
-      <path d="M0,10 c80,-18 230,-12 350,7 c80,13 260,17 350,-5 v100 h-700z" fill="#F2CD5D" />
-    </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#F2CD5D" d="M0,288L60,272C120,256,240,224,360,202.7C480,181,600,171,720,186.7C840,203,960,245,1080,256C1200,267,1320,245,1380,234.7L1440,224L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
 
       <div className="footer-content">
         {/* Add your footer content here */}
