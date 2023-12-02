@@ -1,8 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Great+Vibes&family=Yellowtail&display=swap');
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+    sans-serif; */
+    font-family: 'Yellowtail', cursive;    
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
     /* overflow-x:hidden; */
@@ -14,10 +17,11 @@ code {
 }
 
 .button-color {
-  background-color: #A18F7F;
-  border:0;
+  display:none;
+  background-color: #f2cd5d;
+  border:1px solid #000;
   border-radius: 5px;
-  color:#fff;
+  color:#000;
   width:100%;
   padding:15px;
 }

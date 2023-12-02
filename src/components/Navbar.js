@@ -57,7 +57,7 @@ const Navbar = ({ searchTerm, onSearchChange, onSearchSubmit }) => {
       <nav className={`navbar ${menuOpen ? 'menu-open' : ''}`}>
         <div className="navbar-title">
           <Link to="/">
-            <h2>The Yellow Book Bag</h2>
+            <p>The Yellow Book Bag</p>
           </Link>
         </div>
         <div className="navbar-search-container">
@@ -66,6 +66,16 @@ const Navbar = ({ searchTerm, onSearchChange, onSearchSubmit }) => {
               isMobile ? (
                 <>
                   <div>
+                    <div className="navbar-list">
+                      <button className="menu-toggle" onClick={handleMenuToggle}>
+                        <i className={`fas ${menuOpen ? 'fa-times' : 'fa-bars'}`}></i>
+                      </button>
+                      {menuOpen && (
+                        <ul>
+                          <li onClick={() => handleNavigate('/about')}>About</li>
+                        </ul>
+                      )}
+                    </div>
                     <input
                       type="text"
                       placeholder="Scan ISBN..."
